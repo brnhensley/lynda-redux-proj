@@ -44,22 +44,26 @@ export const allSkiDays = (state = [], action) => {
 
     case c.ADD_DAY:
 
-    const hasDay = state.some(skiDay => skiDay.date === action.payload.date)
+      const hasDay = state.some(skiDay => skiDay.date === action.payload.date)
 
-        // this is an if statement
+      // this is an if statement
       return (hasDay) ?
-      state :
+        state :
 
-      [
-        ...state,
-        skiDay(null, action)
-       ].sort((a,b) => new Date(b.date) - new Date(a.date))
+        [
+          ...state,
+          skiDay(null, action)
+        ].sort((a, b) => new Date(b.date) - new Date(a.date))
 
-    case c.REMOVE_DAY :
+    case c.REMOVE_DAY:
       return state.filter(skiDay => skiDay.date !== action.payload)
 
     default:
       return state
 
   }
+}
+
+export const fetching = (state=false, action) => {
+  return state
 }

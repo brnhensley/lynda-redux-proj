@@ -1,9 +1,9 @@
-import C from '../constants'
+import c from '../constants'
 import expect from 'expect'
 import { fetching } from '../store/reducers'
 
 const action = {
-    type: C.FETCH_RESORT_NAMES
+    type: c.FETCH_RESORT_NAMES
 }
 
 const state = false
