@@ -1,19 +1,22 @@
 import c from './constants';
-import { goal } from './store/reducers';
+import { goal, skiDay, errors } from './store/reducers';
 
-const state = 10
+const state = [
+   "shit",
+   "bad"
+]
 
 const action = {
-   type: c.SET_GOAL,
-   payload: 15
+   type: c.CLEAR_ERROR,
+   payload: 0
 }
 
-const nextState = goal(state, action)
+const nextState = errors(state, action)
 
 console.log(`
 
-initial goal: ${state}
+initial state: ${state}
 action: ${JSON.stringify(action)}
-new goal: ${nextState}
+new state: ${JSON.stringify(nextState)}
 
 `);
