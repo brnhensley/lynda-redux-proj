@@ -1,22 +1,32 @@
 import c from './constants';
-import { goal, skiDay, errors } from './store/reducers';
+import { allSkiDays } from './store/reducers';
 
 const state = [
-   "shit",
-   "bad"
+   {
+      "resort": "Kirkwood",
+      "date": "2016-12-7",
+      "powder": true,
+      "backcountry": false
+   },
+   {
+      "resort": "Squaw Valley",
+      "date": "2016-12-5",
+      "powder": false,
+      "backcountry": false
+   }
 ]
 
 const action = {
-   type: c.CLEAR_ERROR,
-   payload: 0
+   type: c.REMOVE_DAY,
+   payload: "2016-12-7"
 }
 
-const nextState = errors(state, action)
+const nextState = allSkiDays(state, action)
 
 console.log(`
 
-initial state: ${state}
-action: ${JSON.stringify(action)}
-new state: ${JSON.stringify(nextState)}
+   initial state: ${JSON.stringify(state)}
+   action: ${JSON.stringify(action)}
+   new state: ${JSON.stringify(nextState)}
 
 `);
