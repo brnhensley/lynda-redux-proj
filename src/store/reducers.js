@@ -1,4 +1,5 @@
 import c from '../constants';
+import { combineReducers } from 'redux'
 
 // Same as
 // ⬆ Turnery Operator for this if statement
@@ -10,17 +11,15 @@ import c from '../constants';
 //   return state
 // }
 
-export const goal = (state = 10, action) => {
+export const goal = (state = 10, action) =>
   (action.type === c.SET_GOAL) ?
     parseInt(action.payload) :
     state
-}
 
-export const skiDay = (state = null, action) => {
+export const skiDay = (state = null, action) =>
   (action.type === c.ADD_DAY) ?
     action.payload : // If true
     state // Else
-}
 
 export const errors = (state = [], action) => {
   switch (action.type) {
@@ -77,7 +76,7 @@ export const fetching = (state = false, action) => {
       return false
 
     default:
-      state
+      return state
   }
 }
 
@@ -95,3 +94,14 @@ export const suggestions = (state = [], action) => {
 
   }
 }
+
+
+export default combineReducers({
+  allSkiDays,
+  goal,
+  errors,
+  resortNames: combineReducers({
+    fetching,
+    suggestions
+  })
+})

@@ -23,6 +23,11 @@
 	"errors": [],
 	"resortNames": {
 		"fetching": false,
-		"suggestions": ["Squaw Valley", "Snowbird", "Stowe", "Steamboat"]
+		"suggestions": [
+			"Squaw Valley",
+			"Snowbird",
+			"Stowe",
+			"Steamboat"
+		]
 	}
 }
