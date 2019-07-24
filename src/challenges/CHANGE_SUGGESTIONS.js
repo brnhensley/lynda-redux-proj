@@ -22,12 +22,11 @@ const actualState = {
 	suggestions: suggestions(state.suggestions, action)
 }
 
-expect(actualState.suggestions).toEqual(expectedState.suggestions)
 expect(actualState.fetching).toEqual(expectedState.fetching)
+expect(actualState.suggestions).toEqual(expectedState.suggestions)
 
 console.log(`
 
     Challenge D: CHANGE_SUGGESTIONS PASSED!!!
-
 
 `)

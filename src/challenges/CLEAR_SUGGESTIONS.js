@@ -1,9 +1,9 @@
-import C from '../constants'
+import c from '../constants'
 import { suggestions } from '../store/reducers'
 import expect from 'expect'
 
 const action = {
-    type: C.CLEAR_SUGGESTIONS
+    type: c.CLEAR_SUGGESTIONS
 }
 
 const state = ['Heavenly Ski Resort', 'Heavens Sonohara']
@@ -17,6 +17,5 @@ expect(actualState).toEqual(expectedState)
 console.log(`
 
     Challenge C: CLEAR_SUGGESTIONS PASSED!!!
-
 
 `)
