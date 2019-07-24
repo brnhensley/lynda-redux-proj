@@ -1,100 +1,89 @@
-import c from '../constants';
+import C from '../constants'
 import { combineReducers } from 'redux'
 
-// Same as
-// ⬆ Turnery Operator for this if statement
-// function goal(state, action) {
-// if (action.type === c.SET_GOAL) {
-//   return parseInt(action.payload)
-// }
-// else {
-//   return state
-// }
-
 export const goal = (state = 10, action) =>
-  (action.type === c.SET_GOAL) ?
+  (action.type === C.SET_GOAL) ?
     parseInt(action.payload) :
     state
 
 export const skiDay = (state = null, action) =>
-  (action.type === c.ADD_DAY) ?
-    action.payload : // If true
-    state // Else
+  (action.type === C.ADD_DAY) ?
+    action.payload :
+    state
 
 export const errors = (state = [], action) => {
   switch (action.type) {
-
-    case c.ADD_ERROR:
+    case C.ADD_ERROR:
       return [
         ...state,
         action.payload
       ]
-
-    case c.CLEAR_ERROR:
+    case C.CLEAR_ERROR:
       return state.filter((message, i) => i !== action.payload)
-
     default:
       return state
   }
 }
 
 export const allSkiDays = (state = [], action) => {
+
   switch (action.type) {
 
-    case c.ADD_DAY:
+    case C.ADD_DAY:
 
       const hasDay = state.some(skiDay => skiDay.date === action.payload.date)
 
-      // this is an if statement
       return (hasDay) ?
         state :
-
         [
           ...state,
           skiDay(null, action)
         ].sort((a, b) => new Date(b.date) - new Date(a.date))
 
-    case c.REMOVE_DAY:
+    case C.REMOVE_DAY:
+
       return state.filter(skiDay => skiDay.date !== action.payload)
 
     default:
       return state
-
   }
+
 }
 
 export const fetching = (state = false, action) => {
+
   switch (action.type) {
 
-    case c.FETCH_RESORT_NAMES:
+    case C.FETCH_RESORT_NAMES:
       return true
 
-    case c.CANCEL_FETCHING:
+    case C.CANCEL_FETCHING:
       return false
 
-    case c.CHANGE_SUGGESTIONS:
+    case C.CHANGE_SUGGESTIONS:
       return false
 
     default:
       return state
   }
+
 }
 
 export const suggestions = (state = [], action) => {
+
   switch (action.type) {
 
-    case c.CLEAR_SUGGESTIONS:
+    case C.CLEAR_SUGGESTIONS:
       return []
 
-    case c.CHANGE_SUGGESTIONS:
+    case C.CHANGE_SUGGESTIONS:
       return action.payload
 
     default:
       return state
-
   }
-}
 
+}
 
 export default combineReducers({
   allSkiDays,
