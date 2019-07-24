@@ -1,0 +1,40 @@
+import c from '../constants';
+import appReducer from './reducers';
+import { createStore, applyMiddleware } from 'redux';
+
+
+const consoleMessages = store => next => action => {
+  let result
+
+  console.groupCollapsed(`dispatching action => ${action.type}`)
+  console.log('ski days', store.getState().allSkiDays.length);
+
+  result = next(action)
+
+  let { allSkiDays, goal, errors, resortNames } = store.getState()
+
+  console.groupCollapsed(`
+    ski days: ${allSkiDays.length}
+    goal: ${goal}
+    fetching: ${resortNames.fetching}
+    sugg: ${resortNames.suggestions}
+    errors: ${errors.length}
+  `)
+
+  return result
+}
+// const consoleMessages = function(store) {
+//   return function(next) {
+//     return function(action) {
+// let result
+
+// result = next(action)
+
+// return result
+//     }
+//   }
+// }
+
+export default (initialState) => {
+  return applyMiddleware(consoleMessages)(createStore)(appReducer, initialState)
+}
