@@ -1,45 +1,111 @@
-import c from './constants'
+import expect from 'expect'
 import storeFactory from './store'
 
-const initialState = (localStorage['redux-store']) ?
-   JSON.parse(localStorage['redux-store']) :
-   {}
+import {
+	addError,
+	clearError,
+	changeSuggestions,
+	clearSuggestions
+} from './actions'
 
-const saveState = () => {
-   const state = JSON.stringify(store.getState())
-   localStorage['redux-store'] = state
-}
+const store = storeFactory()
 
-const store = storeFactory(initialState)
 
-store.subscribe(saveState)
 
-store.dispatch({
-   type: c.ADD_DAY,
-   payload: {
-      "resort": "Kirkwood",
-      "date": "2016-12-7",
-      "powder": true,
-      "backcountry": false
-   }
-})
 
-store.dispatch({
-   type: c.ADD_DAY,
-   payload: {
-      "resort": "Kirddskwood",
-      "date": "2016-ff-7",
-      "powder": true,
-      "backcountry": false
-   }
-})
 
-store.dispatch({
-   type: c.ADD_DAY,
-   payload: {
-      "resort": "Kirkwoffffffod",
-      "date": "202-7",
-      "powder": true,
-      "backcountry": true
-   }
-})
+
+
+//
+// Challenge: build addError() Action Creator
+//
+
+store.dispatch(
+    addError("something went wrong")
+)
+
+expect(store.getState().errors)
+  .toEqual(["something went wrong"])
+
+console.log(`
+
+    addError() Action Creator Works!!!
+
+`)
+
+
+
+
+
+
+
+
+//
+// Challenge: build clearError() Action Creator
+//
+
+store.dispatch(
+    clearError(0)
+)
+
+expect(store.getState().errors)
+  .toEqual([])
+
+console.log(`
+
+    clearError() Action Creator Works!!!
+
+`)
+
+
+
+
+
+
+
+
+
+
+
+//
+// Challenge: build changeSuggestios() Action Creator
+//
+
+store.dispatch(
+    changeSuggestions(['One', 'Two', 'Three'])
+)
+
+expect(store.getState().resortNames.suggestions)
+    .toEqual(['One', 'Two', 'Three'])
+
+console.log(`
+
+    changeSuggestions() Action Creator Works!!!
+
+`)
+
+
+
+
+
+
+
+
+
+
+
+//
+// Challenge: build clearSuggestions() Action Creator
+//
+
+
+
+store.dispatch(clearSuggestions())
+
+expect(store.getState().resortNames.suggestions).toEqual([])
+
+console.log(`
+
+    clearSuggestions() Action Creator Works!!!
+
+`)
